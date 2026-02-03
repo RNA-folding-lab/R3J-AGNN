@@ -9,16 +9,11 @@ from tqdm import tqdm
 from torch_geometric.loader import DataLoader
 from sklearn.model_selection import KFold, train_test_split
 
-# 导入自定义模型、损失函数和工具函数
 from model import DualGraphRNAModel
-from predict import tensor_to_degrees
 
-# ==========================================
-# 1. 全局配置与超参数
-# ==========================================
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 THRESHOLD = 10.0
-BATCH_SIZE = 1 # 建议调大一点，1 太慢且不稳定
+BATCH_SIZE = 1 
 NUM_EPOCHS = 100
 PATIENCE = 60
 PRED_IS_SINCOS = True
@@ -410,4 +405,5 @@ def train_kfold(data_path, base_output_dir, k_folds=5):
             criterion,
             save_path,
             device
+
         )
